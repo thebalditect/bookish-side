@@ -1,3 +1,5 @@
+echo "Linting documents"
+npx markdownlint-cli2 "**/*.md" "#node_modules" --config ./.markdownlint-cli2.yaml
 
 export DOTNET_ROOT=$HOME/.dotnet
 export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools
