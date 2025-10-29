@@ -56,7 +56,7 @@ jobs:
             /d:sonar.host.url="https://sonarcloud.io"
           echo "Finished initializing sonnar scanner. Running dotnet test with coverage next"
           
-          dotnet test ./MyBookishSide.sln --configuration Release --no-build --collect: "XPlat Code Coverage" --results-directory coverage
+          dotnet test ./MyBookishSide.sln --configuration Release --collect: "XPlat Code Coverage" --results-directory coverage
           mkdir -p coverage
           cp $(find coverage -name 'coverage.cobertura.xml' | head -n 1) coverage/coverage.xml
           
