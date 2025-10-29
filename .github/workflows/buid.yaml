@@ -1,6 +1,10 @@
+name: Build
 on:
   push:
     branches: [ main ]
+    paths-ignore:
+      - '**/*.md'
+      - 'docs/**'
 
 jobs:
   build:
