@@ -1,3 +1,5 @@
 # bookish-side
 
 Explore the bookish side
+
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=thebalditect_my-bookish-side&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=thebalditect_my-bookish-side) [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=thebalditect_my-bookish-side&metric=coverage)](https://sonarcloud.io/summary/new_code?id=thebalditect_my-bookish-side) [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=thebalditect_my-bookish-side&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=thebalditect_my-bookish-side)
