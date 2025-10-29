@@ -1,0 +1,39 @@
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    name: Build
+    runs-on: ${{matrix.os}}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ ubuntu-latest, windows-latest, macos-latest ]
+    
+    steps:
+      - name: Checkout Code
+        id: check-out-code
+        uses: actions/checkout@v5
+
+      - name: Install .Net 9 SDK
+        id: install-dotnet
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: '9.0.x'
+
+      - name: Restore Dependencies
+        id: restore-dependencies
+        run: dotnet restore
+
+      - name: Build Solution
+        id: build-solution
+        run: dotnet build ./MyBookishSide.sln --no-restore --configuration Release
+
+      - name: Lint Code
+        id: lint-code
+        run: dotnet format ./MyBookishSide.sln --verify-no-changes
+
+      - name: Run tests
+        id: run-tests
+        run: dotnet test ./MyBookishSide -- no-build --verbosity normal
