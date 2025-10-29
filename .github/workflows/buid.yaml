@@ -16,6 +16,10 @@ jobs:
         id: check-out-code
         uses: actions/checkout@v5
 
+      - name: Stop conversion of lf to crlf
+        id: stop-force-conversion
+        run: git config --global core.autocrlf false
+
       - name: Install .Net 9 SDK
         id: install-dotnet
         uses: actions/setup-dotnet@v5
