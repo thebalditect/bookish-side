@@ -2,6 +2,6 @@
 export DOTNET_ROOT=$HOME/.dotnet
 export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools
 echo "Checking linting of code in the solution"
-dotnet format ./MyBookishSide.sln
+dotnet format ./MyBookishSide.sln --verify-no-changes
 echo "Running tests"
 dotnet test ./MyBookishSide.sln
