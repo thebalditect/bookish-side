@@ -64,4 +64,8 @@ jobs:
             /p:CoverletOutputFormat=opencover \
             /p:CoverletOutput=coverage/coverage.xml
           
+          COVERAGE_FILE=$(find coverage -name '*.xml' | head -n 1)
+          echo "Coverage file found at: $COVERAGE_FILE"
+          cp "$COVERAGE_FILE" coverage/coverage.xml
+          
           dotnet sonarscanner end /d:sonar.token="$SONAR_TOKEN"
