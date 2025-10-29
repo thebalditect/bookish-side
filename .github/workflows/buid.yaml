@@ -41,7 +41,7 @@ jobs:
         id: run-tests
         run: |
           dotnet tool install --global dotnet-coverage
-          dotnet tool install --global dotnet-scanner
+          dotnet tool install --global dotnet-sonarscanner
           export PATH="$PATH:~/.dotnet/tools"
           
           dotnet-sonarscanner begin \
