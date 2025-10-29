@@ -6,6 +6,8 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/dotnet/sdk:9.0
     env:
       SONAR_TOKEN: ${{secrets.SONAR_TOKEN}}
     
@@ -23,12 +25,6 @@ jobs:
           java-version: 17
           distribution: temurin
 
-      - name: Install .Net 9 SDK
-        id: install-dotnet
-        uses: actions/setup-dotnet@v5
-        with:
-          dotnet-version: '9.0.x'
-
       - name: Build Solution
         id: build-solution
         run: dotnet build ./MyBookishSide.sln --configuration Release
@@ -42,7 +38,8 @@ jobs:
         run: |
           dotnet tool install --global dotnet-coverage
           dotnet tool install --global dotnet-sonarscanner
-          export PATH="$PATH:~/.dotnet/tools"
+          export PATH="$PATH:/root/.dotnet/tools
+          mkdir -p coverage
           
           dotnet-sonarscanner begin \
             /k:"thebalditect_my-bookish-side" \
