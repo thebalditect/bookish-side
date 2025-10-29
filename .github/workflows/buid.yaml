@@ -52,7 +52,7 @@ jobs:
             /k:"thebalditect_my-bookish-side" \
             /o:"thebalditect" \
             /d:sonar.token="$SONAR_TOKEN" \
-            /d:sonar.cs.opencover.reportsPaths="coverage/coverage.xml" \
+            /d:sonar.cs.opencover.reportsPaths="tests/**/coverage.opencover.xml" \
             /d:sonar.host.url="https://sonarcloud.io"
           
           
@@ -61,11 +61,5 @@ jobs:
             --configuration Release \
             --no-restore \
             /p:CollectCoverage=true \
-            /p:CoverletOutputFormat=opencover \
-            /p:CoverletOutput=coverage/coverage.xml
-          
-          COVERAGE_FILE=$(find coverage -name '*.xml' | head -n 1)
-          echo "Coverage file found at: $COVERAGE_FILE"
-          cp "$COVERAGE_FILE" coverage/coverage.xml
-          
+            /p:CoverletOutputFormat=opencover
           dotnet sonarscanner end /d:sonar.token="$SONAR_TOKEN"
