@@ -12,7 +12,7 @@ public class ErrorTests
         ErrorType expectedErrorType = ErrorType.Failure;
         //Act
         var error = Error.Failure(code, description);
-        
+
         //Assert
         Assert.Equal(code, error.Code);
         Assert.Equal(description, error.Description);
@@ -27,10 +27,10 @@ public class ErrorTests
     {
         //Arrange
         ErrorType expectedErrorType = ErrorType.NotFound;
-        
+
         //Act
         var error = Error.NotFound(code, description);
-        
+
         //Assert
         Assert.Equal(code, error.Code);
         Assert.Equal(description, error.Description);
@@ -45,10 +45,10 @@ public class ErrorTests
     {
         //Arrange
         ErrorType expectedErrorType = ErrorType.Conflict;
-        
+
         //Act
         var error = Error.Conflict(code, description);
-        
+
         //Assert
         Assert.Equal(code, error.Code);
         Assert.Equal(description, error.Description);
