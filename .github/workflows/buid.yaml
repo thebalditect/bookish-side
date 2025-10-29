@@ -6,15 +6,22 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
+    env:
+      SONAR_TOKEN: ${{secrets.SONAR_TOKEN}}
     
     steps:
       - name: Checkout Code
         id: check-out-code
         uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
 
-      - name: Stop conversion of lf to crlf
-        id: stop-force-conversion
-        run: git config --global core.autocrlf false
+      - name: Install Java
+        id: install-java
+        uses: actions/setup-java@v5
+        with:
+          java-version: 17
+          distribution: 'Zulu'
 
       - name: Install .Net 9 SDK
         id: install-dotnet
@@ -22,18 +29,27 @@ jobs:
         with:
           dotnet-version: '9.0.x'
 
-      - name: Restore Dependencies
-        id: restore-dependencies
-        run: dotnet restore
-
       - name: Build Solution
         id: build-solution
-        run: dotnet build ./MyBookishSide.sln --no-restore --configuration Release
+        run: dotnet build ./MyBookishSide.sln --configuration Release
 
       - name: Lint Code
         id: lint-code
         run: dotnet format ./MyBookishSide.sln --verify-no-changes
 
-      - name: Run tests
+      - name: Run tests with coverage
         id: run-tests
-        run: dotnet test ./MyBookishSide.sln -- no-build --verbosity normal
+        run: |
+          dotnet tool install --global dotnet-coverage
+          dotnet tool install --global dotnet-scanner
+          export PATH="$PATH:~/.dotnet/tools"
+          
+          dotnet-sonarscanner begin \
+            /k:"thebalditect_my-bookish-side" \
+            /o:"thebalditect" \
+            /d:sonar.token="${{ secrets.SONAR_TOKEN }}" \
+            /d:sonar.coverageReportPaths="coverage/coverage.xml" \
+            /d:sonar.host.url="https://sonarcloud.io"
+          
+          dotnet-coverage collect "dotnet test --no-build --verbosity normal" -f xml -o coverage/coverage.xml
+          dotnet sonarscanner end /d:sonar.token="$SONAR_TOKEN"
