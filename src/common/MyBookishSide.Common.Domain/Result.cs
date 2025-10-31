@@ -9,7 +9,7 @@ public class Result
     protected Result(bool isSuccess, List<Error>? errors)
     {
         IsSuccess = isSuccess;
-        Errors = errors ?? null;
+        Errors = errors;
     }
 
     public static Result Success()
