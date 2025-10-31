@@ -15,7 +15,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\..\src\common\MyBookishSide.Common.Domain\MyBookishSide.Common.Domain.csproj"/>
+      <ProjectReference Include="..\..\MyBookishSide.Common.Domain\MyBookishSide.Common.Domain.csproj" />
     </ItemGroup>
-
 </Project>
