@@ -10,9 +10,26 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - name: Clone repository
-        id: clone-repository
+      - name: Checkout main repository
+        id: checkout-main-repository
+        uses: actions/checkout@v5
+
+      - name: Clone wiki repository
+        id: clone-wiki-repository
         run: |
           git clone https://github.com/${{ github.repository }}.wiki.git wiki
           cd wiki
           ls -la
+
+      - name: Install Node
+        id: install-node
+        uses: actions/setup-node@v6
+
+      - name: Install Markdown cli
+        id: install-markdown-cli
+        run: npm install markdownlint-cli2 --global
+
+      - name: Run linting
+        id: run-linting
+        run: markdownlint-cli2 "**/*.md" "#node_modules" --config ./.markdownlint-cli2.yaml
+        
