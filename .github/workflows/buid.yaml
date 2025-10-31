@@ -37,13 +37,16 @@ jobs:
           java-version: 17
           distribution: temurin
 
-      - name: Build Solution
-        id: build-solution
-        run: dotnet build ./MyBookishSide.sln --configuration Release
-
       - name: Lint Code
         id: lint-code
         run: dotnet format ./MyBookishSide.sln --verify-no-changes --no-restore
+
+      - name: Run mutation tests
+        id: run-mutation-tests
+        run:
+          dotnet tool install --global dotnet-stryker
+          export PATH="$PATH:$HOME/.dotnet/tools"
+          dotnet stryker --config-file ./stryker-config.json
 
       - name: Run tests with coverage
         id: run-tests
