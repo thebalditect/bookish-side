@@ -10,6 +10,8 @@ on:
       - '**/*.sln'
       - '**.props'
       - '.editorconfig'
+  workflow_dispatch:
+
 jobs:
   build:
     name: Build
@@ -63,7 +65,7 @@ jobs:
             /k:"thebalditect_my-bookish-side" \
             /o:"thebalditect" \
             /d:sonar.token="$SONAR_TOKEN" \
-            /d:sonar.cs.opencover.reportsPaths="tests/**/coverage.opencover.xml" \
+            /d:sonar.cs.opencover.reportsPaths="src/**/coverage.opencover.xml" \
             /d:sonar.host.url="https://sonarcloud.io"
           
           
