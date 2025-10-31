@@ -52,7 +52,7 @@ jobs:
         run:
           dotnet tool install --global dotnet-stryker
           export PATH="$PATH:$HOME/.dotnet/tools"
-          dotnet stryker --config-file ./stryker-config.json --solution ./MyBookishSide.sln --configuration Release
+          dotnet stryker --config-file ./stryker-config.json
 
       - name: Run tests with coverage
         id: run-tests
