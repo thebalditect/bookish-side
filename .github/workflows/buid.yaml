@@ -39,6 +39,10 @@ jobs:
           java-version: 17
           distribution: temurin
 
+      - name: Restore nuget
+        id: restore-nuget
+        run: dotnet restore ./MyBookishSide.sln
+
       - name: Lint Code
         id: lint-code
         run: dotnet format ./MyBookishSide.sln --verify-no-changes --no-restore
@@ -48,7 +52,7 @@ jobs:
         run:
           dotnet tool install --global dotnet-stryker
           export PATH="$PATH:$HOME/.dotnet/tools"
-          dotnet stryker --config-file ./stryker-config.json
+          dotnet stryker --config-file ./stryker-config.json --solution ./MyBookishSide.sln --configuration Release
 
       - name: Run tests with coverage
         id: run-tests
