@@ -10,10 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - name: Checkout main repository
-        id: checkout-main-repository
-        uses: actions/checkout@v5
-
       - name: Clone wiki repository
         id: clone-wiki-repository
         run: |
@@ -31,5 +27,5 @@ jobs:
 
       - name: Run linting
         id: run-linting
-        run: markdownlint-cli2 "**/*.md" "#node_modules" --config ./.markdownlint-cli2.yaml
+        run: markdownlint-cli2 "**/*.md" "#node_modules" --config ./configs/.markdownlint-cli2.yaml
         
