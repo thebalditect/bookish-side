@@ -11,6 +11,9 @@ config:
   # First line in file should be a top level header - disabled for flexibility
   MD041: false
   
+  # Multiple headings with the same content  - allow for long documents
+  MD024: true
+  
   # Multiple top level headers in the same document - allow for long documents
   MD025: true
   
