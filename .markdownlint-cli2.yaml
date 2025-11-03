@@ -12,7 +12,7 @@ config:
   MD041: false
   
   # Multiple top level headers in the same document - allow for long documents
-  MD025: false
+  MD025: true
   
   # Trailing punctuation in header - allow flexibility
   MD026: false
